@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Solvera Strategies — US Energy Market Advisory</title>
+<meta name="description" content="Cross-border energy market entry, M&A facilitation, and strategic advisory for the US renewable energy sector. Specialized in ERCOT market access and PV/BESS project development.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy:       #0E2337;
+    --navy-mid:   #1B3A5C;
+    --navy-light: #2E5F8A;
+    --gold:       #C49A3C;
+    --gold-light: #E8C97A;
+    --off-white:  #F5F0E8;
+    --warm-gray:  #D4CFC6;
+    --text-muted: #8A8378;
+    --surface:    #112840;
+    --border:     rgba(196,154,60,0.2);
+    --font-display: 'Cormorant Garamond', Georgia, serif;
+    --font-body:    'Jost', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--navy);
+    color: var(--off-white);
+    font-family: var(--font-body);
+    font-weight: 300;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.5rem 4rem;
+    background: rgba(14,35,55,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(196,154,60,0.12);
+    transition: padding 0.3s ease;
+  }
+  .nav-logo {
+    font-family: var(--font-display);
+    font-size: 1.4rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    color: var(--off-white);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+  }
+  .nav-logo svg { display: block; }
+  .nav-logo span { color: var(--gold); }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a {
+    font-size: 0.75rem;
+    font-weight: 400;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--warm-gray);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--gold-light); }
+  .nav-cta {
+    font-size: 0.72rem;
+    font-weight: 400;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold);
+    border: 1px solid var(--gold);
+    padding: 0.55rem 1.4rem;
+    text-decoration: none;
+    transition: all 0.25s ease;
+  }
+  .nav-cta:hover { background: var(--gold); color: var(--navy); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex; align-items: center;
+    padding: 8rem 4rem 6rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 60% 50% at 70% 50%, rgba(46,95,138,0.18) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 60% at 85% 20%, rgba(196,154,60,0.07) 0%, transparent 60%);
+  }
+  .hero-grid {
+    position: absolute; inset: 0; opacity: 0.04;
+    background-image:
+      linear-gradient(rgba(196,154,60,0.8) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(196,154,60,0.8) 1px, transparent 1px);
+    background-size: 80px 80px;
+  }
+  .hero-content {
+    position: relative; z-index: 1;
+    max-width: 780px;
+    animation: fadeUp 1s ease both;
+  }
+  .hero-eyebrow {
+    display: inline-flex; align-items: center; gap: 0.75rem;
+    font-size: 0.72rem; font-weight: 400;
+    letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 2rem;
+  }
+  .hero-eyebrow::before {
+    content: ''; display: block;
+    width: 32px; height: 1px;
+    background: var(--gold);
+  }
+  h1 {
+    font-family: var(--font-display);
+    font-size: clamp(3rem, 6vw, 5.5rem);
+    font-weight: 300;
+    line-height: 1.08;
+    letter-spacing: -0.01em;
+    color: var(--off-white);
+    margin-bottom: 2rem;
+  }
+  h1 em {
+    font-style: italic;
+    color: var(--gold-light);
+  }
+  .hero-body {
+    font-size: 1.05rem;
+    font-weight: 300;
+    color: var(--warm-gray);
+    max-width: 540px;
+    line-height: 1.75;
+    margin-bottom: 3rem;
+  }
+  .hero-actions { display: flex; gap: 1.25rem; align-items: center; flex-wrap: wrap; }
+  .btn-primary {
+    font-family: var(--font-body);
+    font-size: 0.75rem; font-weight: 400;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--navy);
+    background: var(--gold);
+    padding: 0.85rem 2.2rem;
+    text-decoration: none;
+    transition: all 0.25s ease;
+    display: inline-block;
+  }
+  .btn-primary:hover { background: var(--gold-light); }
+  .btn-ghost {
+    font-family: var(--font-body);
+    font-size: 0.75rem; font-weight: 400;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--warm-gray);
+    text-decoration: none;
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    transition: color 0.2s;
+  }
+  .btn-ghost:hover { color: var(--off-white); }
+  .btn-ghost::after { content: '→'; transition: transform 0.2s; }
+  .btn-ghost:hover::after { transform: translateX(4px); }
+
+  .hero-stats {
+    position: absolute; right: 4rem; bottom: 5rem;
+    display: flex; flex-direction: column; gap: 2rem;
+    animation: fadeUp 1s 0.3s ease both;
+  }
+  .stat { text-align: right; }
+  .stat-num {
+    font-family: var(--font-display);
+    font-size: 2.8rem; font-weight: 300;
+    color: var(--gold-light);
+    line-height: 1;
+  }
+  .stat-label {
+    font-size: 0.68rem; font-weight: 400;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--text-muted);
+    margin-top: 0.25rem;
+  }
+  .stat-divider {
+    width: 1px; height: 40px;
+    background: var(--border);
+    margin-left: auto;
+  }
+
+  /* ── SECTIONS ── */
+  section { padding: 7rem 4rem; }
+  .section-eyebrow {
+    display: inline-flex; align-items: center; gap: 0.75rem;
+    font-size: 0.7rem; font-weight: 400;
+    letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.5rem;
+  }
+  .section-eyebrow::before {
+    content: ''; display: block;
+    width: 24px; height: 1px;
+    background: var(--gold);
+  }
+  h2 {
+    font-family: var(--font-display);
+    font-size: clamp(2.2rem, 4vw, 3.5rem);
+    font-weight: 300;
+    line-height: 1.15;
+    color: var(--off-white);
+    margin-bottom: 1.5rem;
+  }
+  h2 em { font-style: italic; color: var(--gold-light); }
+  .section-intro {
+    font-size: 1rem;
+    color: var(--warm-gray);
+    max-width: 560px;
+    line-height: 1.8;
+  }
+
+  /* ── ABOUT ── */
+  .about { background: var(--surface); }
+  .about-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    align-items: center;
+    max-width: 1200px; margin: 0 auto;
+  }
+  .about-text p {
+    color: var(--warm-gray);
+    font-size: 0.95rem;
+    line-height: 1.85;
+    margin-bottom: 1.25rem;
+  }
+  .about-text p:last-child { margin-bottom: 0; }
+  .about-text strong { color: var(--off-white); font-weight: 400; }
+  .about-visual {
+    display: flex; flex-direction: column; gap: 1.5rem;
+  }
+  .about-pillar {
+    border-left: 1px solid var(--border);
+    padding-left: 1.5rem;
+  }
+  .about-pillar-title {
+    font-size: 0.72rem; font-weight: 400;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.4rem;
+  }
+  .about-pillar-text {
+    font-size: 0.88rem;
+    color: var(--warm-gray);
+    line-height: 1.65;
+  }
+
+  /* ── SERVICES ── */
+  .services { max-width: 1200px; margin: 0 auto; }
+  .services-header {
+    display: flex; justify-content: space-between;
+    align-items: flex-end; margin-bottom: 4rem;
+    gap: 2rem; flex-wrap: wrap;
+  }
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+  }
+  .service-card {
+    background: var(--navy);
+    padding: 2.5rem 2rem;
+    transition: background 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  .service-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0;
+    height: 2px;
+    background: var(--gold);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.35s ease;
+  }
+  .service-card:hover { background: var(--surface); }
+  .service-card:hover::before { transform: scaleX(1); }
+  .service-num {
+    font-family: var(--font-display);
+    font-size: 3.5rem; font-weight: 300;
+    color: rgba(196,154,60,0.15);
+    line-height: 1;
+    margin-bottom: 1.5rem;
+    transition: color 0.3s;
+  }
+  .service-card:hover .service-num { color: rgba(196,154,60,0.3); }
+  .service-title {
+    font-family: var(--font-display);
+    font-size: 1.35rem; font-weight: 400;
+    color: var(--off-white);
+    margin-bottom: 1rem;
+    line-height: 1.25;
+  }
+  .service-body {
+    font-size: 0.88rem;
+    color: var(--warm-gray);
+    line-height: 1.75;
+    margin-bottom: 1.5rem;
+  }
+  .service-tags {
+    display: flex; flex-wrap: wrap; gap: 0.5rem;
+  }
+  .tag {
+    font-size: 0.65rem; font-weight: 400;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--text-muted);
+    border: 1px solid rgba(196,154,60,0.15);
+    padding: 0.3rem 0.7rem;
+  }
+
+  /* ── FOCUS AREAS ── */
+  .focus { background: var(--surface); }
+  .focus-inner { max-width: 1200px; margin: 0 auto; }
+  .focus-header { margin-bottom: 4rem; }
+  .focus-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2px;
+    background: var(--border);
+    border: 1px solid var(--border);
+  }
+  .focus-item {
+    background: var(--navy);
+    padding: 2rem 2.5rem;
+    display: flex; gap: 1.5rem;
+    align-items: flex-start;
+    transition: background 0.25s;
+  }
+  .focus-item:hover { background: rgba(14,35,55,0.7); }
+  .focus-icon {
+    width: 36px; height: 36px; flex-shrink: 0;
+    border: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    margin-top: 0.15rem;
+  }
+  .focus-icon svg { width: 16px; height: 16px; fill: none; stroke: var(--gold); stroke-width: 1.5; }
+  .focus-label {
+    font-size: 0.72rem; font-weight: 400;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.4rem;
+  }
+  .focus-text {
+    font-size: 0.9rem;
+    color: var(--warm-gray);
+    line-height: 1.7;
+  }
+
+  /* ── APPROACH ── */
+  .approach { max-width: 1200px; margin: 0 auto; }
+  .approach-header { margin-bottom: 4rem; }
+  .approach-steps {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    position: relative;
+  }
+  .approach-steps::before {
+    content: '';
+    position: absolute;
+    top: 1.7rem; left: 12%; right: 12%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--border) 20%, var(--border) 80%, transparent);
+  }
+  .step {
+    padding: 0 1.5rem;
+    text-align: center;
+  }
+  .step-dot {
+    width: 3.5rem; height: 3.5rem;
+    border: 1px solid var(--border);
+    background: var(--navy);
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 1.5rem;
+    font-family: var(--font-display);
+    font-size: 1.1rem; font-weight: 300;
+    color: var(--gold);
+    position: relative; z-index: 1;
+    transition: all 0.25s;
+  }
+  .step:hover .step-dot {
+    background: var(--gold);
+    color: var(--navy);
+    border-color: var(--gold);
+  }
+  .step-title {
+    font-family: var(--font-display);
+    font-size: 1.1rem; font-weight: 400;
+    color: var(--off-white);
+    margin-bottom: 0.75rem;
+  }
+  .step-text {
+    font-size: 0.85rem;
+    color: var(--warm-gray);
+    line-height: 1.7;
+  }
+
+  /* ── DIFFERENTIATORS ── */
+  .diff { background: var(--surface); }
+  .diff-inner {
+    max-width: 1200px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 1.6fr;
+    gap: 6rem; align-items: start;
+  }
+  .diff-left h2 { margin-bottom: 1rem; }
+  .diff-left .section-intro { margin-bottom: 2rem; }
+  .diff-list {
+    display: flex; flex-direction: column; gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+  }
+  .diff-item {
+    background: var(--navy);
+    padding: 1.5rem 1.75rem;
+    display: flex; gap: 1rem; align-items: flex-start;
+    transition: background 0.2s;
+  }
+  .diff-item:hover { background: rgba(14,35,55,0.5); }
+  .diff-check {
+    width: 20px; height: 20px; flex-shrink: 0;
+    border: 1px solid var(--gold);
+    display: flex; align-items: center; justify-content: center;
+    margin-top: 0.1rem;
+  }
+  .diff-check::after {
+    content: '';
+    width: 6px; height: 6px;
+    background: var(--gold);
+  }
+  .diff-item-title {
+    font-size: 0.88rem; font-weight: 400;
+    color: var(--off-white);
+    margin-bottom: 0.3rem;
+  }
+  .diff-item-text {
+    font-size: 0.83rem;
+    color: var(--warm-gray);
+    line-height: 1.65;
+  }
+
+  /* ── CONTACT ── */
+  .contact {
+    background: var(--navy-mid);
+    text-align: center;
+  }
+  .contact-inner { max-width: 680px; margin: 0 auto; }
+  .contact h2 { margin-bottom: 1rem; }
+  .contact .section-intro {
+    margin: 0 auto 2.5rem;
+    text-align: center;
+    max-width: 480px;
+  }
+  .contact-details {
+    display: flex; justify-content: center;
+    gap: 3rem; flex-wrap: wrap;
+    margin-bottom: 3rem;
+  }
+  .contact-item { text-align: center; }
+  .contact-label {
+    font-size: 0.65rem; font-weight: 400;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--text-muted); margin-bottom: 0.4rem;
+  }
+  .contact-value {
+    font-size: 0.95rem;
+    color: var(--off-white);
+  }
+  .contact-value a {
+    color: var(--off-white); text-decoration: none;
+    transition: color 0.2s;
+  }
+  .contact-value a:hover { color: var(--gold-light); }
+  .contact-divider {
+    width: 1px; height: 40px;
+    background: var(--border);
+    margin: 0 auto 3rem;
+  }
+  .contact-note {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    font-style: italic;
+    margin-top: 1.5rem;
+    font-family: var(--font-display);
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--navy);
+    padding: 2.5rem 4rem;
+    display: flex; align-items: center;
+    justify-content: space-between; flex-wrap: wrap; gap: 1rem;
+    border-top: 1px solid rgba(196,154,60,0.1);
+  }
+  .footer-logo {
+    font-family: var(--font-display);
+    font-size: 1.1rem; font-weight: 400;
+    color: var(--off-white);
+  }
+  .footer-logo span { color: var(--gold); }
+  .footer-copy {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+  }
+  .footer-links {
+    display: flex; gap: 2rem; list-style: none;
+  }
+  .footer-links a {
+    font-size: 0.72rem; font-weight: 400;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--text-muted); text-decoration: none;
+    transition: color 0.2s;
+  }
+  .footer-links a:hover { color: var(--gold); }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .reveal {
+    opacity: 0; transform: translateY(20px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible {
+    opacity: 1; transform: translateY(0);
+  }
+
+  /* ── MOBILE ── */
+  @media (max-width: 900px) {
+    nav { padding: 1.25rem 1.5rem; }
+    .nav-links { display: none; }
+    section { padding: 5rem 1.5rem; }
+    .hero { padding: 7rem 1.5rem 5rem; }
+    h1 { font-size: clamp(2.4rem, 8vw, 4rem); }
+    .hero-stats { display: none; }
+    .about-inner { grid-template-columns: 1fr; gap: 3rem; }
+    .services-grid { grid-template-columns: 1fr; }
+    .focus-grid { grid-template-columns: 1fr; }
+    .approach-steps { grid-template-columns: repeat(2, 1fr); gap: 2rem; }
+    .approach-steps::before { display: none; }
+    .diff-inner { grid-template-columns: 1fr; gap: 3rem; }
+    footer { padding: 2rem 1.5rem; flex-direction: column; align-items: flex-start; gap: 1rem; }
+  }
+
+  @media (max-width: 600px) {
+    .approach-steps { grid-template-columns: 1fr; }
+    .services-header { flex-direction: column; align-items: flex-start; }
+    .contact-details { flex-direction: column; gap: 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#home" class="nav-logo">
+    <svg width="190" height="44" viewBox="0 0 190 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <line x1="34" y1="22" x2="8"  y2="6"  stroke="#F5F0E8" stroke-width="2" stroke-linecap="round"/>
+      <line x1="34" y1="22" x2="8"  y2="22" stroke="#F5F0E8" stroke-width="2" stroke-linecap="round"/>
+      <line x1="34" y1="22" x2="8"  y2="38" stroke="#F5F0E8" stroke-width="2" stroke-linecap="round"/>
+      <circle cx="34" cy="22" r="7"   fill="#C49A3C"/>
+      <circle cx="8"  cy="6"  r="4.5" fill="#E8C97A"/>
+      <circle cx="8"  cy="22" r="4.5" fill="#E8C97A" fill-opacity="0.5"/>
+      <circle cx="8"  cy="38" r="4.5" fill="#E8C97A" fill-opacity="0.22"/>
+      <text x="52" y="18" font-family="'Jost', sans-serif" font-weight="500" font-size="18" fill="#F5F0E8" letter-spacing="1.5">SOLVERA</text>
+      <text x="54" y="33" font-family="'Jost', sans-serif" font-weight="300" font-size="9" fill="#C49A3C" letter-spacing="3.5">STRATEGIES</text>
+    </svg>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#focus">Focus</a></li>
+    <li><a href="#approach">Approach</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Get in touch</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">US Energy Market Advisory</div>
+    <h1>Where <em>cross-border<br>expertise</em> meets<br>energy markets.</h1>
+    <p class="hero-body">Solvera Strategies helps international companies navigate US power markets — from electricity market entry and M&A facilitation across ERCOT and PJM, to renewable project advisory and clean energy supply structuring.</p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn-primary">Start a conversation</a>
+      <a href="#services" class="btn-ghost">Explore services</a>
+    </div>
+  </div>
+  <div class="hero-stats">
+    <div class="stat">
+      <div class="stat-num">ERCOT · PJM</div>
+      <div class="stat-label">Primary market focus</div>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat">
+      <div class="stat-num">PV + BESS</div>
+      <div class="stat-label">Core technology expertise</div>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat">
+      <div class="stat-num">M&A</div>
+      <div class="stat-label">Transaction facilitation</div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="about-inner">
+    <div class="about-text reveal">
+      <div class="section-eyebrow">About Solvera</div>
+      <h2>Built for the<br><em>intersection</em> of<br>two worlds.</h2>
+      <p>Solvera Strategies is a specialized advisory firm focused on one specific challenge: helping companies with strong international track records build a credible, operational presence in US energy markets.</p>
+      <p>We work at the intersection of <strong>international companies</strong> and the US renewable energy sector — a space where technical expertise is abundant but market-specific knowledge is rare. We provide both.</p>
+      <p>Our advisory is grounded in <strong>direct project development experience</strong> in photovoltaic and battery energy storage systems, not general consulting theory. We understand how EPC firms evaluate vendors, how ERCOT market participants manage risk, and how US project developers think about counterparties.</p>
+    </div>
+    <div class="about-visual reveal">
+      <div class="about-pillar">
+        <div class="about-pillar-title">Practitioner background</div>
+        <div class="about-pillar-text">Direct experience developing PV and BESS projects in the US market. We understand the process from the inside — permitting, interconnection, offtake, and EPC procurement.</div>
+      </div>
+      <div class="about-pillar">
+        <div class="about-pillar-title">Cross-border fluency</div>
+        <div class="about-pillar-text">We work with international companies entering US energy markets. We understand the regulatory, commercial, and cultural context that determines whether a market entry succeeds or stalls.</div>
+      </div>
+      <div class="about-pillar">
+        <div class="about-pillar-title">Aligned incentives</div>
+        <div class="about-pillar-text">Our fee structures are designed so that our financial success depends on yours. Retainers are tied to defined deliverables. M&A fees trigger only on closed transactions.</div>
+      </div>
+      <div class="about-pillar">
+        <div class="about-pillar-title">Transparent by design</div>
+        <div class="about-pillar-text">We disclose conflicts proactively and in writing. We recommend independent counsel before any transaction. We tell clients what they need to hear.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services" style="padding: 7rem 4rem;">
+  <div class="services reveal">
+    <div class="services-header">
+      <div>
+        <div class="section-eyebrow">Services</div>
+        <h2>Four ways we<br>create <em>value</em>.</h2>
+      </div>
+      <p class="section-intro">Each engagement is purpose-built for the client's specific situation. We do not offer off-the-shelf packages.</p>
+    </div>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-num">01</div>
+        <div class="service-title">Energy Platform Development</div>
+        <div class="service-body">We help international companies design and execute US power market entry strategies — acquiring licensed market participants, structuring BESS operations, navigating regulatory requirements, and building frameworks for long-term clean energy supply. We coordinate the right advisors and manage the process end to end.</div>
+        <div class="service-tags">
+          <span class="tag">Market Access</span>
+          <span class="tag">BESS Operations</span>
+          <span class="tag">Regulatory Navigation</span>
+          <span class="tag">Clean Energy Supply</span>
+        </div>
+      </div>
+      <div class="service-card">
+        <div class="service-num">02</div>
+        <div class="service-title">Renewable Project Advisory</div>
+        <div class="service-body">Strategic guidance for companies evaluating US renewable energy project investments. We provide market context, technology assessment, and deal structuring support for utility-scale PV and BESS acquisitions — with hands-on experience across Texas, PJM, and New Jersey development.</div>
+        <div class="service-tags">
+          <span class="tag">PV + BESS</span>
+          <span class="tag">IRA Incentives</span>
+          <span class="tag">Project Due Diligence</span>
+        </div>
+      </div>
+      <div class="service-card">
+        <div class="service-num">03</div>
+        <div class="service-title">M&A Facilitation</div>
+        <div class="service-body">End-to-end facilitation of energy sector M&A transactions — from discreet target identification through due diligence, regulatory notifications, and close. We manage complexity so our clients can focus on what comes after the deal: integration, operations, and growth.</div>
+        <div class="service-tags">
+          <span class="tag">Target Identification</span>
+          <span class="tag">Due Diligence</span>
+          <span class="tag">Deal Structuring</span>
+        </div>
+      </div>
+      <div class="service-card" style="grid-column: 1 / -1; display: grid; grid-template-columns: auto 1fr auto; gap: 2rem; align-items: start;">
+        <div class="service-num" style="margin-bottom: 0;">04</div>
+        <div>
+          <div class="service-title">Clean Energy Supply Structuring</div>
+          <div class="service-body" style="margin-bottom: 0;">Designing frameworks that allow companies to procure verifiable renewable energy for US operations — REC bundling, green tariff structures, and bilateral power purchase agreements that provide cost certainty and meet sustainability commitments. We structure supply arrangements that are commercially sound, regulatory-compliant, and built to last.</div>
+        </div>
+        <div class="service-tags" style="flex-direction: column; align-self: center;">
+          <span class="tag">RECs</span>
+          <span class="tag">Green Tariffs</span>
+          <span class="tag">PPAs</span>
+          <span class="tag">Sustainability</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOCUS -->
+<section class="focus" id="focus">
+  <div class="focus-inner reveal">
+    <div class="focus-header">
+      <div class="section-eyebrow">Where we focus</div>
+      <h2>Deep expertise in<br>a <em>defined</em> space.</h2>
+    </div>
+    <div class="focus-grid">
+      <div class="focus-item">
+        <div class="focus-icon">
+          <svg viewBox="0 0 24 24"><polygon points="13,2 3,14 12,14 11,22 21,10 12,10"/></svg>
+        </div>
+        <div>
+          <div class="focus-label">Markets</div>
+          <div class="focus-text">Texas / ERCOT and PJM — two of the largest and most active electricity markets in the US, covering competitive power markets across Texas, the Mid-Atlantic, and the Northeast.</div>
+        </div>
+      </div>
+      <div class="focus-item">
+        <div class="focus-icon">
+          <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="M3 9h18M9 21V9"/></svg>
+        </div>
+        <div>
+          <div class="focus-label">Core Technologies</div>
+          <div class="focus-text">Utility-scale photovoltaic (PV), Battery Energy Storage Systems (BESS), and hybrid PV+BESS projects. Deep operational knowledge across the full project development lifecycle.</div>
+        </div>
+      </div>
+      <div class="focus-item">
+        <div class="focus-icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 1 0 18M3 12h18M12 3c-2.5 2.5-4 5.5-4 9s1.5 6.5 4 9"/></svg>
+        </div>
+        <div>
+          <div class="focus-label">Client Profile</div>
+          <div class="focus-text">International companies entering US energy markets — manufacturers, investors, and technology firms navigating the regulatory, commercial, and operational complexity of building a credible US energy presence.</div>
+        </div>
+      </div>
+      <div class="focus-item">
+        <div class="focus-icon">
+          <svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4"/><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20z"/></svg>
+        </div>
+        <div>
+          <div class="focus-label">Regulatory Scope</div>
+          <div class="focus-text">Federal and state energy regulatory frameworks including PUCT, ERCOT, IRA incentive structures, New Jersey clean energy programs, FEOC compliance, and CFIUS coordination — with independent legal counsel engaged for all transaction matters.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- APPROACH -->
+<section id="approach" style="padding: 7rem 4rem;">
+  <div class="approach reveal">
+    <div class="approach-header">
+      <div class="section-eyebrow">How we work</div>
+      <h2>A structured path<br>to <em>market presence</em>.</h2>
+    </div>
+    <div class="approach-steps">
+      <div class="step">
+        <div class="step-dot">I</div>
+        <div class="step-title">Assess</div>
+        <div class="step-text">Understand your objectives, constraints, existing relationships, and risk tolerance. Build an honest picture of the opportunity before any commitments are made.</div>
+      </div>
+      <div class="step">
+        <div class="step-dot">II</div>
+        <div class="step-title">Map</div>
+        <div class="step-text">Develop a specific, executable strategy. Identify the right market entry path, acquisition targets, or deal structures for your situation — not a generic playbook.</div>
+      </div>
+      <div class="step">
+        <div class="step-dot">III</div>
+        <div class="step-title">Execute</div>
+        <div class="step-text">Lead the process with defined milestones and accountability. Manage complexity — regulatory, commercial, relational — while you focus on your core business.</div>
+      </div>
+      <div class="step">
+        <div class="step-dot">IV</div>
+        <div class="step-title">Establish</div>
+        <div class="step-text">Ensure you have the operational foundation, local relationships, and market knowledge to sustain and grow your US energy presence independently.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DIFFERENTIATORS -->
+<section class="diff" id="why">
+  <div class="diff-inner">
+    <div class="reveal">
+      <div class="section-eyebrow">Why Solvera</div>
+      <h2>We say what<br>others <em>won't</em>.</h2>
+      <p class="section-intro">The energy market is full of advisors who tell clients what they want to hear. We build long-term relationships by telling clients what they need to hear — early, clearly, and in writing.</p>
+    </div>
+    <div class="diff-list reveal">
+      <div class="diff-item">
+        <div class="diff-check"></div>
+        <div>
+          <div class="diff-item-title">Practitioner credibility, not consulting theory</div>
+          <div class="diff-item-text">Our advice comes from direct project development experience in PV and BESS — not frameworks learned in a classroom. We've been on the other side of the table from EPCs, utilities, and developers.</div>
+        </div>
+      </div>
+      <div class="diff-item">
+        <div class="diff-check"></div>
+        <div>
+          <div class="diff-item-title">Conflict of interest disclosed proactively</div>
+          <div class="diff-item-text">When we have a potential conflict, we disclose it in writing before any engagement begins — and we define clear scope boundaries around it. Clients deserve to know exactly where we stand.</div>
+        </div>
+      </div>
+      <div class="diff-item">
+        <div class="diff-check"></div>
+        <div>
+          <div class="diff-item-title">Independent counsel always recommended</div>
+          <div class="diff-item-text">We are not lawyers and we don't pretend to be. We always recommend clients engage qualified US legal and regulatory counsel before any transaction or market entry commitment.</div>
+        </div>
+      </div>
+      <div class="diff-item">
+        <div class="diff-check"></div>
+        <div>
+          <div class="diff-item-title">Fees tied to outcomes</div>
+          <div class="diff-item-text">Retainers are anchored to defined deliverables. M&A success fees trigger only when transactions close. We structure our compensation so that our interests are aligned with yours at every stage.</div>
+        </div>
+      </div>
+      <div class="diff-item">
+        <div class="diff-check"></div>
+        <div>
+          <div class="diff-item-title">We tell you when the deal doesn't make sense</div>
+          <div class="diff-item-text">If an opportunity has fundamental problems — regulatory, commercial, or structural — we say so clearly and early. A client who avoids a bad deal is a client who comes back for the next one.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="contact-inner reveal">
+    <div class="section-eyebrow" style="justify-content: center;">Get in touch</div>
+    <h2>Ready to explore<br>the <em>opportunity</em>?</h2>
+    <p class="section-intro">Every engagement begins with a direct conversation. Tell us what you're trying to accomplish in the US energy market — we'll tell you honestly whether and how we can help.</p>
+    <div class="contact-details">
+      <div class="contact-item">
+        <div class="contact-label">Principal</div>
+        <div class="contact-value">William Yen</div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-label">Email</div>
+        <div class="contact-value"><a href="mailto:william.yen@solverastrategies.com">william.yen@solverastrategies.com</a></div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-label">Phone</div>
+        <div class="contact-value"><a href="tel:+19083082140">(908) 308-2140</a></div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-label">Location</div>
+        <div class="contact-value">New York &nbsp;·&nbsp; New Jersey &nbsp;·&nbsp; Texas</div>
+      </div>
+    </div>
+    <div class="contact-divider"></div>
+    <a href="mailto:william.yen@solverastrategies.com" class="btn-primary">Send a message</a>
+    <p class="contact-note">All initial conversations are held in strict confidence.</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">
+    <svg width="120" height="26" viewBox="0 0 120 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <line x1="20" y1="13" x2="5"  y2="3"  stroke="#F5F0E8" stroke-width="1.4" stroke-linecap="round"/>
+      <line x1="20" y1="13" x2="5"  y2="13" stroke="#F5F0E8" stroke-width="1.4" stroke-linecap="round"/>
+      <line x1="20" y1="13" x2="5"  y2="23" stroke="#F5F0E8" stroke-width="1.4" stroke-linecap="round"/>
+      <circle cx="20" cy="13" r="4"   fill="#C49A3C"/>
+      <circle cx="5"  cy="3"  r="2.5" fill="#E8C97A"/>
+      <circle cx="5"  cy="13" r="2.5" fill="#E8C97A" fill-opacity="0.5"/>
+      <circle cx="5"  cy="23" r="2.5" fill="#E8C97A" fill-opacity="0.22"/>
+      <text x="31" y="11" font-family="'Jost', sans-serif" font-weight="500" font-size="11" fill="#F5F0E8" letter-spacing="0.8">SOLVERA</text>
+      <text x="32" y="20" font-family="'Jost', sans-serif" font-weight="300" font-size="5.5" fill="#C49A3C" letter-spacing="2">STRATEGIES</text>
+    </svg>
+  </div>
+  <ul class="footer-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#why">Why Solvera</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="footer-copy">© 2026 Solvera Strategies. All rights reserved.</div>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  const nav = document.querySelector('nav');
+  window.addEventListener('scroll', () => {
+    nav.style.padding = window.scrollY > 60
+      ? '1rem 4rem' : '1.5rem 4rem';
+  });
+</script>
+
+</body>
+</html>
